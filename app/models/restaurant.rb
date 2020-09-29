@@ -4,5 +4,5 @@ class Restaurant < ApplicationRecord
     validates :address, uniqueness: true, presence: true
     validates :category, inclusion: { in: ["chinese", "italian", "japanese", "french", "belgian"] }
     # When a restaurant is destroyed, all of its reviews must be destroyed as well.
-    has_many :reviews, :dependent => :destroy
+    has_many :reviews, dependent: :destroy
 end
