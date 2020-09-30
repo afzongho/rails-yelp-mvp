@@ -5,7 +5,7 @@ class RestaurantsController < ApplicationController
     end
   
     def show
-      @reviews = @restaurant.reviews
+      @restaurant = Restaurant.find(params[:id])
     end
   
     def new
@@ -13,7 +13,7 @@ class RestaurantsController < ApplicationController
     end
   
     def create
-      @restaurant = Restaurant.new(restaurant_params)
+      @restaurant = Restaurant.new(strong_params)
       if @restaurant.save
         redirect_to restaurant_path(@restaurant)
       else
@@ -23,11 +23,8 @@ class RestaurantsController < ApplicationController
   
     private
   
-    def set_restaurant
-      @restaurant = Restaurant.find(params[:id])
-    end
-  
-    def restaurant_params
+    def strong_params
       params.require(:restaurant).permit(:name, :address, :phone_number, :category)
     end
+  
   end
